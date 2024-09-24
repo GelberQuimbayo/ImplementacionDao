@@ -26,8 +26,8 @@ namespace ImplementacionPatronDao
         [HttpPost] // Indica que este método maneja solicitudes POST
         public ActionResult<Cliente> Post([FromBody] Cliente nuevoCliente) // Método para agregar un nuevo cliente
         {
-            ClienteDAO clienteDAO = new ClienteDAO(); // Crea una instancia del DAO para manejar la lógica de negocio
-            clienteDAO.agregarCliente(nuevoCliente); // Agrega el nuevo cliente
+            ClienteDAO clienteDAO = new ClienteDAO(); // Crea una instancia del DAO para manejar la informacion
+            clienteDAO.agregarCliente(nuevoCliente);
 
             // Retorna un resultado 201 Created con un mensaje y el objeto creado
             return CreatedAtAction(nameof(Get), new { id = nuevoCliente.Id }, nuevoCliente); // Asegúrate de que 'Id' sea la propiedad que identifica al cliente
