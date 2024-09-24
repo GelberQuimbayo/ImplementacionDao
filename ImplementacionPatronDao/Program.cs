@@ -1,15 +1,19 @@
 ﻿using ImplementacionPatronDao;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 
 class Program
 {
-    static void Main()
+
+    public static async Task Main(string[] args) // Método Main
     {
         IClienteDAO clienteDAO = new ClienteDAO();
 
         // Agregar un cliente
-        clienteDAO.agregarCliente(new Cliente { Nombre = "siguiente registro", Email = "siguiente@example.com" });
+        //clienteDAO.agregarCliente(new Cliente { Nombre = "siguiente registro", Email = "siguiente@example.com" });
 
         // Obtener un cliente
         Cliente cliente = clienteDAO.consultarCliente(1);
@@ -33,6 +37,31 @@ class Program
         }
 
         // Eliminar un cliente
+    
         clienteDAO.eliminarCliente(1);
+
+
+
+        var builder = WebApplication.CreateBuilder(args);
+
+
+        // Agregar servicios al contenedor
+        builder.Services.AddControllers();
+
+        var app = builder.Build();
+
+        // Configurar la canalización de solicitudes
+        app.UseHttpsRedirection();
+        app.UseAuthorization();
+        app.MapControllers();
+
+        app.Run("http://localhost:5001"); // Puedes cambiar el puerto si es necesario
+
+        Console.WriteLine("API corriendo en http://localhost:5001");
+        app.RunAsync();
+
+
     }
+
+
 }
