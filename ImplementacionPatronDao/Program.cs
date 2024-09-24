@@ -55,7 +55,7 @@ class Program
         app.UseAuthorization();
         app.MapControllers();
 
-        app.Run("http://localhost:5001"); // Puedes cambiar el puerto si es necesario
+        app.Run("http://localhost:5001"); // se parametriza puerto 5001 se puede poner cualquiera
 
         Console.WriteLine("API corriendo en http://localhost:5001");
         app.RunAsync();
